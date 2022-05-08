@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>MapBox TileSet Generation Demo</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
     <style>
@@ -19,11 +20,70 @@
             bottom: 0;
             width: 100%;
         }
+
+        .ui {
+            position: absolute;
+            z-index: 1000;
+            width: auto;
+            height: auto;
+            padding: 10px 10px 10px 10px;
+            border-radius: 3px;
+            background-color: rgba(0, 160, 160, 0.5);
+            font-family: 'Roboto', sans-serif;
+            text-shadow: rgb(255, 255, 255) 0px 0px 5px;
+        }
+        
+        .ui > p {
+            font-size: large;
+            font-weight: 800;
+            margin: 0;
+            text-align: right;
+        }
+
+        .legend-item {
+            height: auto;
+            width: auto;
+            font-size: small;
+            display: flex;
+            align-items: center;
+        }
+
+        .swatch {
+            height: 19px;
+            width: 19px;
+            border-style: solid;
+            border-width: 1px;
+            border-color: black;
+        }
+
+
+
+        #layers {
+            top: 0;
+            right: 0;
+            margin: 10px 10px 10px 10px;
+        }
+
+        #legend {
+            bottom: 30px;
+            right: 0;
+        }
+
+
     </style>
 </head>
 
 <body>
     <div id="map"></div>
+    <div id="layers" class="ui">Layer Select</div>
+    <div id="legend" class="ui">
+        <p>Legend</p>
+        <div class="legend-item">
+            <div class="swatch" style="background-color:#ce475b;"></div>
+            <p>Census blocks with max available download speed of 35 megabits/sec.</p>
+        </div>
+    </div>
+    
     <script>
         mapboxgl.accessToken =
             'pk.eyJ1IjoiaG9sZGVuYiIsImEiOiJjbDJ3bTJrNG0wYzhyM2VrNHVobGw0bHdnIn0.i5aju2LSTccjdRb1W5G2HQ';
@@ -53,7 +113,7 @@
                 'id': 'pt1',
                 'type': 'raster',
                 'layout': {
-                    'visibility': 'visible'
+                    'visibility': 'none'
                 },
                 'source': 'pt1-tiles'
             });
@@ -72,7 +132,7 @@
                 'id': 'pt2',
                 'type': 'raster',
                 'layout': {
-                    'visibility': 'visible'
+                    'visibility': 'none'
                 },
                 'source': 'pt2-tiles'
             });
@@ -91,16 +151,24 @@
                 'id': 'pt3',
                 'type': 'raster',
                 'layout': {
-                    'visibility': 'visible'
+                    'visibility': 'none'
                 },
                 'source': 'pt3-tiles'
             });
 
             // UI
-
-            map.addControl()
+            const layers = document.getElementById("layers");
+            const contents = ["<p>Layer Select</p>"];
+            contents.push("<div class=\"layerCheck\"><input type=\"checkbox\" onclick=\"toggleLayer('pt1')\">Base Map</div>");
+            contents.push("<div class=\"layerCheck\"><input type=\"checkbox\" onclick=\"toggleLayer('pt2')\">Thematic Map</div>");
+            contents.push("<div class=\"layerCheck\"><input type=\"checkbox\" onclick=\"toggleLayer('pt3')\">Thematic Map + BaseMap</div>");
+            layers.innerHTML = contents.join("");
 
         });
+
+        function toggleLayer(id) {
+                map.setLayoutProperty(id, 'visibility', map.getLayoutProperty(id, 'visibility') == 'none' ? 'visible' : 'none');
+        }
     </script>
 
 </body>
