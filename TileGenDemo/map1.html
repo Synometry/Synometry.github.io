@@ -26,12 +26,13 @@
     <div id="map"></div>
     <script>
         mapboxgl.accessToken =
-            'pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw';
+            'pk.eyJ1IjoiaG9sZGVuYiIsImEiOiJjbDJ3bTJrNG0wYzhyM2VrNHVobGw0bHdnIn0.i5aju2LSTccjdRb1W5G2HQ';
         let map = new mapboxgl.Map({
             container: 'map', // container ID
-            style: 'mapbox://styles/mapbox/dark-v10',
-            zoom: 5, // starting zoom
-            center: [138, 38] // starting center
+            style: 'mapbox://styles/mapbox/light-v10',
+            zoom: 7.5, // starting zoom
+            center: [-122.3347951856213, 47.62364678029067], // starting center
+            refreshExpiredTiles: true
         });
 
         const grades = [4, 5, 6],
@@ -41,10 +42,30 @@
         //load data to the map as new layers.
         //map.on('load', function loadingData() {
         map.on('load', () => { //simplifying the function statement: arrow with brackets to define a function
+            
+            map.addSource('pt1-tiles', {
+                'type': 'raster',
+                'tiles': [
+                    'assets/tiles/BaseMap/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256,
+                'attribution': 'Basemap tileset #1 by Holden Bailey</a>'
+            });
 
+            map.addLayer({
+                'id': 'pt1',
+                'type': 'raster',
+                'layout': {
+                    'visibility': 'visible'
+                },
+                'source': 'pt1-tiles'
+            });
+            
+            
+            
             // when loading a geojson, there are two steps
             // add a source of the data and then add the layer out of the source
-            map.addSource('earthquakes', {
+            /*map.addSource('earthquakes', {
                 type: 'geojson',
                 data: 'assets/earthquakes.geojson'
             });
@@ -96,7 +117,7 @@
                     .setLngLat(event.features[0].geometry.coordinates)
                     .setHTML(`<strong>Magnitude:</strong> ${event.features[0].properties.mag}`)
                     .addTo(map);
-            });
+            });*/
 
 
 
