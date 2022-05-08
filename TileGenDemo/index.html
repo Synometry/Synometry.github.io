@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>MapBox TileSet Generation Demo</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoiaG9sZGVuYiIsImEiOiJjbDJ3bTJrNG0wYzhyM2VrNHVobGw0bHdnIn0.i5aju2LSTccjdRb1W5G2HQ';
+        let map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/light-v10',
+            zoom: 10.5, // starting zoom
+            center: [-122.3347951856213, 47.62364678029067], // starting center
+            refreshExpiredTiles: true
+        });
+
+        //load data to the map as new layers.
+        //map.on('load', function loadingData() {
+        map.on('load', () => { //simplifying the function statement: arrow with brackets to define a function
+            
+            // tileset 1
+            map.addSource('pt1-tiles', {
+                'type': 'raster',
+                'tiles': [
+                    'assets/tiles/BaseMap/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256,
+                'attribution': 'Basemap tileset #1 by Holden Bailey</a>'
+            });
+
+            map.addLayer({
+                'id': 'pt1',
+                'type': 'raster',
+                'layout': {
+                    'visibility': 'visible'
+                },
+                'source': 'pt1-tiles'
+            });
+
+            // tileset 2
+            map.addSource('pt2-tiles', {
+                'type': 'raster',
+                'tiles': [
+                    'assets/tiles/thematic1/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256,
+                'attribution': 'Thematic tileset #1 by Holden Bailey</a>'
+            });
+
+            map.addLayer({
+                'id': 'pt2',
+                'type': 'raster',
+                'layout': {
+                    'visibility': 'visible'
+                },
+                'source': 'pt2-tiles'
+            });
+            
+            // tileset 3
+            map.addSource('pt3-tiles', {
+                'type': 'raster',
+                'tiles': [
+                    'assets/tiles/thematicAndBase/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256,
+                'attribution': 'Thematic tileset #2 by Holden Bailey</a>'
+            });
+
+            map.addLayer({
+                'id': 'pt3',
+                'type': 'raster',
+                'layout': {
+                    'visibility': 'visible'
+                },
+                'source': 'pt3-tiles'
+            });
+
+            // UI
+
+            map.addControl()
+
+        });
+    </script>
+
+</body>
+
+</html>
