@@ -1,6 +1,6 @@
 # **Tile Set Generation Demonstration**
 
-Project Web Page: [synometry.github.io/TileGenDemo/](synometry.github.io/TileGenDemo/)
+Project Web Page: [synometry.github.io/TileGenDemo/](https://synometry.github.io/TileGenDemo/)
 
 ## Introduction
 
