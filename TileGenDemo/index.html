@@ -27,6 +27,7 @@
             width: auto;
             height: auto;
             padding: 10px 10px 10px 10px;
+            margin: 10px 10px 10px 10px;
             border-radius: 3px;
             background-color: rgba(0, 160, 160, 0.5);
             font-family: 'Roboto', sans-serif;
@@ -61,7 +62,7 @@
         #layers {
             top: 0;
             right: 0;
-            margin: 10px 10px 10px 10px;
+            
         }
 
         #legend {
@@ -74,6 +75,10 @@
 </head>
 
 <body>
+    <div id="title" class="ui">
+        <h1>Tile Set Generation Exercise</h1>
+        <h2>Try scrolling!</h2>
+    </div>
     <div id="map"></div>
     <div id="layers" class="ui">Layer Select</div>
     <div id="legend" class="ui">
@@ -156,12 +161,32 @@
                 'source': 'pt3-tiles'
             });
 
+            // tileset 4
+                        map.addSource('pt4-tiles', {
+                'type': 'raster',
+                'tiles': [
+                    'assets/tiles/NDVI/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256,
+                'attribution': 'Thematic tileset #3 by Holden Bailey, Satellite Imagery (L8 OLI/TIRS) sourced from USGS</a>'
+            });
+
+            map.addLayer({
+                'id': 'pt4',
+                'type': 'raster',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'source': 'pt4-tiles'
+            });
+
             // UI
             const layers = document.getElementById("layers");
             const contents = ["<p>Layer Select</p>"];
             contents.push("<div class=\"layerCheck\"><input type=\"checkbox\" onclick=\"toggleLayer('pt1')\">Base Map</div>");
             contents.push("<div class=\"layerCheck\"><input type=\"checkbox\" onclick=\"toggleLayer('pt2')\">Thematic Map</div>");
             contents.push("<div class=\"layerCheck\"><input type=\"checkbox\" onclick=\"toggleLayer('pt3')\">Thematic Map + BaseMap</div>");
+            contents.push("<div class=\"layerCheck\"><input type=\"checkbox\" onclick=\"toggleLayer('pt4')\">NDVI Raster (Vegetation Classification)</div>");
             layers.innerHTML = contents.join("");
 
         });
