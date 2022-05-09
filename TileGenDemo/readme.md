@@ -13,7 +13,7 @@ This repository is a demonstration of tile set creation using QGIS. Tile sets ar
 
 The map represented by this tileset is simply a deviation from MapBox's normal map. I uploaded an image of mine to MapBox Cartogram and tweaked the colors and other aspects to produce what I thought was a decent-on-the-eyes basemap.
 
-![tileset 1: basemap](assets\screenshots\tileset1ss.jpeg)
+![tileset 1: basemap](assets/screenshots/tileset1ss.jpeg)
 
 ---
 
@@ -22,7 +22,7 @@ The map represented by this tileset is simply a deviation from MapBox's normal m
 
 The feature class represented by this tileset is an overlay of census blocks with a max advertised download speed of 35 Megabits-per-second (Mb should not be confused with MB). The tiles of this layer are png's to allow for overlaying on a basemap.
 
-![tileset 2: thematic](assets\screenshots\tileset2ss.jpeg)
+![tileset 2: thematic](assets/screenshots/tileset2ss.jpeg)
 
 ---
 
@@ -31,7 +31,7 @@ The feature class represented by this tileset is an overlay of census blocks wit
 
 The map represented by this tileset is the combination of the two previous tilesets.
 
-![tileset 3: thematic](assets\screenshots\tileset3ss.jpeg)
+![tileset 3: thematic](assets/screenshots/tileset3ss.jpeg)
 
 ---
 
@@ -40,4 +40,4 @@ The map represented by this tileset is the combination of the two previous tiles
 
 The raster map represented by this tileset is an interpretation of various wavelengths of light detected by the USGS's LandSat 8 satellite array. These wavelength "bands" are then used to calculate NDVI values, which I use to estimate the density of vegetation. I express this classification by the color ramp of this map's base layer.
 
-![tileset 4: thematic](assets\screenshots\tileset4ss.jpeg)
+![tileset 4: thematic](assets/screenshots/tileset4ss.jpeg)
